@@ -9,9 +9,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.List;
 
+import static java.time.LocalDate.now;
 import static java.util.Arrays.asList;
 
 @Component
@@ -52,23 +52,25 @@ public class InitialDataRunner implements ApplicationRunner
 		Task task = new Task();
 		task.setTitle("test-task");
 		task.setDescription("making-test");
+		task.setStartDate(now());
 
 		Label school = new Label();
 		school.setLabelName("school");
-			labelRepository.save(school);
-//		task.getLabels().add(school);
+		labelRepository.save(school);
+
+		//task.addLabel(school);
 
 		task.setPriority(priorityRepository.findById(3L).get());
 
 		task.setState(stateRepository.findById(2L).get());
 
-		task.setStartDate(LocalDate.now());
 
 		taskRepository.save(task);
 
 		Category category = new Category();
 		category.setCategoryName(catName);
-//		category.addTask(task);
+
+		//category.addTask(task);
 
 		return category;
 	}
