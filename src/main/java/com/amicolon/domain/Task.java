@@ -1,7 +1,5 @@
 package com.amicolon.domain;
 
-import com.amicolon.domain.enumerated.Priority;
-import com.amicolon.domain.enumerated.Status;
 import lombok.Getter;
 import lombok.Setter;
 

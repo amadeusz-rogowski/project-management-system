@@ -17,5 +17,10 @@ public class Label
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String label;
+	private String labelName;
+
+	public Long getId()
+	{
+		return id;
+	}
 }
