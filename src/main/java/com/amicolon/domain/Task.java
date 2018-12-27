@@ -22,7 +22,7 @@ public class Task
 	private LocalDate finishDate;
 
 	@Enumerated(value = EnumType.STRING)
-	private Status status;
+	private State state;
 
 	@Enumerated(value = EnumType.STRING)
 	private Priority priority;

@@ -1,10 +1,10 @@
 package com.amicolon.domain.enumerated;
 
-public enum StatusName
+public enum StateName
 {
 	ACTIVE, FINISHED, DELAYED;
 
-	StatusName()
+	StateName()
 	{
 	}
 }
