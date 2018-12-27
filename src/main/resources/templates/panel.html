@@ -10,7 +10,7 @@
 
     <table>
         <tr th:each="category : ${categories}">
-            <td th:text="${category.getCategoryName()}"></td>
+            <td><a href="#" th:href="@{'category/' + ${category.getId()}}" th:text="${category.getCategoryName()}"></a></td>
         </tr>
     </table>
 
