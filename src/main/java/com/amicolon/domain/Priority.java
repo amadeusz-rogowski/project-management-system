@@ -3,6 +3,7 @@ package com.amicolon.domain;
 import com.amicolon.domain.enumerated.PriorityName;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Priority
@@ -13,6 +14,9 @@ public class Priority
 
 	@Enumerated(EnumType.STRING)
 	private PriorityName priorityName;
+
+	@OneToMany(mappedBy = "priority", fetch = FetchType.LAZY)
+	private Set<Task> tasks;
 
 	public Priority()
 	{
@@ -36,5 +40,15 @@ public class Priority
 	public void setPriorityName(PriorityName priorityName)
 	{
 		this.priorityName = priorityName;
+	}
+
+	public Set<Task> getTasks()
+	{
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks)
+	{
+		this.tasks = tasks;
 	}
 }

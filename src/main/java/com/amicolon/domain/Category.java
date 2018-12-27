@@ -10,6 +10,8 @@ public class Category
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private String categoryName;
+
 	@Lob
 	private Byte[] image;
 
@@ -30,6 +32,16 @@ public class Category
 		this.id = id;
 	}
 
+	public String getCategoryName()
+	{
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName)
+	{
+		this.categoryName = categoryName;
+	}
+
 	public Byte[] getImage()
 	{
 		return image;
@@ -48,5 +60,12 @@ public class Category
 	public void setTasks(Set<Task> tasks)
 	{
 		this.tasks = tasks;
+	}
+
+	public Category addTask(Task task)
+	{
+		task.setCategory(this);
+		this.tasks.add(task);
+		return this;
 	}
 }

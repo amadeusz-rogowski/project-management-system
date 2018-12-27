@@ -14,17 +14,15 @@ public class Task
 	private String title;
 	@Lob
 	private String description;
+
+	private LocalDate startDate;
 	private LocalDate finishDate;
 
-	@ManyToMany
-	@JoinTable(name = "task_state",
-			joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "state_id"))
-	private Set<State> states;
+	@ManyToOne
+	private State state;
 
-	@ManyToMany
-	@JoinTable(name = "task_priority",
-			joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "priority_id"))
-	private Set<Priority> priorities;
+	@ManyToOne
+	private Priority priority;
 
 	@ManyToMany
 	@JoinTable(name = "task_label",
@@ -68,6 +66,16 @@ public class Task
 		this.description = description;
 	}
 
+	public LocalDate getStartDate()
+	{
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate)
+	{
+		this.startDate = startDate;
+	}
+
 	public LocalDate getFinishDate()
 	{
 		return finishDate;
@@ -78,35 +86,35 @@ public class Task
 		this.finishDate = finishDate;
 	}
 
-//	public Set<State> getStates()
-//	{
-//		return states;
-//	}
-//
-//	public void setStates(Set<State> states)
-//	{
-//		this.states = states;
-//	}
-//
-//	public Set<Priority> getPriorities()
-//	{
-//		return priorities;
-//	}
-//
-//	public void setPriorities(Set<Priority> priorities)
-//	{
-//		this.priorities = priorities;
-//	}
-//
-//	public Set<Label> getLabels()
-//	{
-//		return labels;
-//	}
-//
-//	public void setLabels(Set<Label> labels)
-//	{
-//		this.labels = labels;
-//	}
+	public State getState()
+	{
+		return state;
+	}
+
+	public void setState(State state)
+	{
+		this.state = state;
+	}
+
+	public Priority getPriority()
+	{
+		return priority;
+	}
+
+	public void setPriority(Priority priority)
+	{
+		this.priority = priority;
+	}
+
+	public Set<Label> getLabels()
+	{
+		return labels;
+	}
+
+	public void setLabels(Set<Label> labels)
+	{
+		this.labels = labels;
+	}
 
 	public Category getCategory()
 	{
@@ -116,5 +124,11 @@ public class Task
 	public void setCategory(Category category)
 	{
 		this.category = category;
+	}
+
+	public Task addLabel(Label label)
+	{
+		this.labels.add(label);
+		return this;
 	}
 }

@@ -3,6 +3,7 @@ package com.amicolon.domain;
 import com.amicolon.domain.enumerated.StateName;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class State
@@ -13,6 +14,9 @@ public class State
 
 	@Enumerated(EnumType.STRING)
 	private StateName stateName;
+
+	@OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
+	private Set<Task> tasks;
 
 	public State()
 	{
@@ -36,5 +40,15 @@ public class State
 	public void setStateName(StateName stateName)
 	{
 		this.stateName = stateName;
+	}
+
+	public Set<Task> getTasks()
+	{
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks)
+	{
+		this.tasks = tasks;
 	}
 }
