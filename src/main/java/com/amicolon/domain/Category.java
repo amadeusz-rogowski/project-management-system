@@ -1,6 +1,7 @@
 package com.amicolon.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class Category
 	private Byte[] image;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.EAGER)
-	private Set<Task> tasks;
+	private Set<Task> tasks = new HashSet<>();
 
 	public Category()
 	{
@@ -65,7 +66,7 @@ public class Category
 	public Category addTask(Task task)
 	{
 		task.setCategory(this);
-		this.tasks.add(task);
+		this.getTasks().add(task);
 		return this;
 	}
 }

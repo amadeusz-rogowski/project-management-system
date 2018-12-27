@@ -2,6 +2,7 @@ package com.amicolon.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,7 +28,7 @@ public class Task
 	@ManyToMany
 	@JoinTable(name = "task_label",
 		joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
-	private Set<Label> labels;
+	private Set<Label> labels = new HashSet<>();
 
 	@ManyToOne
 	private Category category;
@@ -128,7 +129,7 @@ public class Task
 
 	public Task addLabel(Label label)
 	{
-		this.labels.add(label);
+		this.getLabels().add(label);
 		return this;
 	}
 }
