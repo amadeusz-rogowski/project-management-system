@@ -1,15 +1,10 @@
 package com.amicolon.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 public class Task
 {
 	@Id
@@ -21,11 +16,15 @@ public class Task
 	private String description;
 	private LocalDate finishDate;
 
-	@Enumerated(value = EnumType.STRING)
-	private State state;
+	@ManyToMany
+	@JoinTable(name = "task_state",
+			joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "state_id"))
+	private Set<State> states;
 
-	@Enumerated(value = EnumType.STRING)
-	private Priority priority;
+	@ManyToMany
+	@JoinTable(name = "task_priority",
+			joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "priority_id"))
+	private Set<Priority> priorities;
 
 	@ManyToMany
 	@JoinTable(name = "task_label",
@@ -34,4 +33,88 @@ public class Task
 
 	@ManyToOne
 	private Category category;
+
+	public Task()
+	{
+	}
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+
+	public String getDescription()
+	{
+		return description;
+	}
+
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+
+	public LocalDate getFinishDate()
+	{
+		return finishDate;
+	}
+
+	public void setFinishDate(LocalDate finishDate)
+	{
+		this.finishDate = finishDate;
+	}
+
+//	public Set<State> getStates()
+//	{
+//		return states;
+//	}
+//
+//	public void setStates(Set<State> states)
+//	{
+//		this.states = states;
+//	}
+//
+//	public Set<Priority> getPriorities()
+//	{
+//		return priorities;
+//	}
+//
+//	public void setPriorities(Set<Priority> priorities)
+//	{
+//		this.priorities = priorities;
+//	}
+//
+//	public Set<Label> getLabels()
+//	{
+//		return labels;
+//	}
+//
+//	public void setLabels(Set<Label> labels)
+//	{
+//		this.labels = labels;
+//	}
+
+	public Category getCategory()
+	{
+		return category;
+	}
+
+	public void setCategory(Category category)
+	{
+		this.category = category;
+	}
 }

@@ -1,14 +1,9 @@
 package com.amicolon.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 public class Category
 {
 	@Id
@@ -21,4 +16,37 @@ public class Category
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.EAGER)
 	private Set<Task> tasks;
 
+	public Category()
+	{
+	}
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+
+	public Byte[] getImage()
+	{
+		return image;
+	}
+
+	public void setImage(Byte[] image)
+	{
+		this.image = image;
+	}
+
+	public Set<Task> getTasks()
+	{
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks)
+	{
+		this.tasks = tasks;
+	}
 }

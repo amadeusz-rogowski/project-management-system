@@ -14,6 +14,10 @@ public class State
 	@Enumerated(EnumType.STRING)
 	private StateName stateName;
 
+	public State()
+	{
+	}
+
 	public Long getId()
 	{
 		return id;

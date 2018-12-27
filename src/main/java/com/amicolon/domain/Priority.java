@@ -1,12 +1,10 @@
 package com.amicolon.domain;
 
 import com.amicolon.domain.enumerated.PriorityName;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
 public class Priority
 {
 	@Id
@@ -15,6 +13,10 @@ public class Priority
 
 	@Enumerated(EnumType.STRING)
 	private PriorityName priorityName;
+
+	public Priority()
+	{
+	}
 
 	public Long getId()
 	{
