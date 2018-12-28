@@ -2,27 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tasks</title>
+    <title th:text="${category.getCategoryName()}"></title>
 </head>
 <body>
 
-<h1>List of tasks</h1>
+<h2 th:text="${category.getCategoryName()}"></h2>
+
+<h4> Add new task</h4>
 
 <table>
     <thead>
         <tr>
             <th>Title <i>Sort</i></th>
-            <th>Description</th>
+            <th>Description </th>
             <th>Start Date <i>Sort</i></th>
             <th>Finish Date <i>Sort</i></th>
             <th>State <i>Sort</i></th>
             <th>Priority <i>Sort</i></th>
             <th>Labels</th>
-            <th>Operations</th>
         </tr>
     </thead>
     <tbody>
-        <tr th:each="task : ${tasks}">
+        <tr th:each="task : ${category.getTasks()}">
             <td th:text="${task.getTitle()}"></td>
             <td th:text="${task.getDescription()}"></td>
             <td th:text="${task.getStartDate()}"></td>
@@ -30,7 +31,8 @@
             <td th:text="${task.getState().getStateName()}"></td>
             <td th:text="${task.getPriority().getPriorityName()}"></td>
             <td th:text="${task.getLabels()}"></td>
-            <td> Add | Delete</td>
+            <td> Update</td>
+            <td> Delete</td>
         </tr>
     </tbody>
 </table>
