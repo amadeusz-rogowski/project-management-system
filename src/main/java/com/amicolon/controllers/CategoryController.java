@@ -27,7 +27,7 @@ public class CategoryController
 	{
 		Category category = categoryService.findCategoryById(new Long(id));
 
-		model.addAttribute("tasks", category.getTasks());
+		model.addAttribute("category", category);
 
 		return "category";
 	}
