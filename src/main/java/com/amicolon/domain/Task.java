@@ -1,11 +1,14 @@
 package com.amicolon.domain;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@EqualsAndHashCode(exclude = {"category"})
 public class Task
 {
 	@Id
@@ -31,6 +34,7 @@ public class Task
 	private Set<Label> labels = new HashSet<>();
 
 	@ManyToOne
+	@JoinColumn(name="category_id", nullable=false)
 	private Category category;
 
 	public Task()

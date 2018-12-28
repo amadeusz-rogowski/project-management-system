@@ -3,6 +3,7 @@ package com.amicolon.domain;
 import com.amicolon.domain.enumerated.PriorityName;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class Priority
 	private PriorityName priorityName;
 
 	@OneToMany(mappedBy = "priority", fetch = FetchType.LAZY)
-	private Set<Task> tasks;
+	private Set<Task> tasks = new HashSet<>();
 
 	public Priority()
 	{

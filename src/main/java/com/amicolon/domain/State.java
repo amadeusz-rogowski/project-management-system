@@ -3,6 +3,7 @@ package com.amicolon.domain;
 import com.amicolon.domain.enumerated.StateName;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class State
 	private StateName stateName;
 
 	@OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
-	private Set<Task> tasks;
+	private Set<Task> tasks = new HashSet<>();
 
 	public State()
 	{
