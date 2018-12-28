@@ -6,20 +6,34 @@
 </head>
 <body>
 
-    <h1>List of tasks</h1>
+<h1>List of tasks</h1>
 
-    <table>
+<table>
+    <thead>
+        <tr>
+            <th>Title <i>Sort</i></th>
+            <th>Description</th>
+            <th>Start Date <i>Sort</i></th>
+            <th>Finish Date <i>Sort</i></th>
+            <th>State <i>Sort</i></th>
+            <th>Priority <i>Sort</i></th>
+            <th>Labels</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
         <tr th:each="task : ${tasks}">
             <td th:text="${task.getTitle()}"></td>
             <td th:text="${task.getDescription()}"></td>
             <td th:text="${task.getStartDate()}"></td>
             <td th:text="${task.getFinishDate()}"></td>
-            <td th:text="${task.getState()}"></td>
-            <td th:text="${task.getPriority()}"></td>
+            <td th:text="${task.getState().getStateName()}"></td>
+            <td th:text="${task.getPriority().getPriorityName()}"></td>
             <td th:text="${task.getLabels()}"></td>
-            <td> Add | Delete </td>
+            <td> Add | Delete</td>
         </tr>
-    </table>
+    </tbody>
+</table>
 
 
 </body>
