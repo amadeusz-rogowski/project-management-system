@@ -64,13 +64,13 @@ public class InitialDataRunner implements ApplicationRunner
 
 		task.setState(stateRepository.findById(2L).get());
 
-
-		taskRepository.save(task);
-
 		Category category = new Category();
 		category.setCategoryName(catName);
 
-		//category.addTask(task);
+		category.addTask(task);
+
+		categoryRepository.save(category);
+		taskRepository.save(task);
 
 		return category;
 	}
