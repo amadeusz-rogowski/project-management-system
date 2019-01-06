@@ -17,6 +17,7 @@
             <td><a href="#" th:href="@{'category/' + ${category.getId()}}" th:text="${category.getCategoryName()}"></a></td>
             <td><a href="#" th:href="@{'/category/' + ${category.getId()}}">View</a></td>
             <td><a href="#" th:href="@{'/category/' + ${category.getId()} + '/update'}">Update</a></td>
+            <td><a href="#" th:href="@{'/category/' + ${category.getId()} + '/delete'}">Delete</a></td>
         </tr>
     </table>
 

@@ -14,4 +14,6 @@ public interface CategoryService
 	CategoryCommand saveCategoryCommand(CategoryCommand categoryCommand);
 
 	CategoryCommand findCommandById(Long id);
+
+	void deleteCategoryById(Long id);
 }

@@ -68,4 +68,10 @@ public class CategoryServiceImpl implements CategoryService
 
 		return categoryToCategoryCommand.convert(saved);
 	}
+
+	@Override
+	public void deleteCategoryById(Long id)
+	{
+		categoryRepository.deleteById(id);
+	}
 }

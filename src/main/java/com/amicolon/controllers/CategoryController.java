@@ -4,14 +4,13 @@ import com.amicolon.commands.CategoryCommand;
 import com.amicolon.domain.Category;
 import com.amicolon.services.middlewares.CategoryService;
 import com.amicolon.services.middlewares.TaskService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @Controller
 public class CategoryController
 {
@@ -44,7 +43,7 @@ public class CategoryController
 	}
 
 	@RequestMapping("/category/{id}/update")
-	public String updateRecipe(@PathVariable String id, Model model)
+	public String updateCategory(@PathVariable String id, Model model)
 	{
 		model.addAttribute("category", categoryService.findCommandById(Long.valueOf(id)));
 
@@ -59,4 +58,12 @@ public class CategoryController
 		return "redirect:/panel";
 	}
 
+	@GetMapping("/category/{id}/delete")
+	public String deleteCategoryById(@PathVariable Long id)
+	{
+		log.debug("Deleting category id: " + id);
+		categoryService.deleteCategoryById(id);
+		
+		return "redirect:/panel";
+	}
 }
