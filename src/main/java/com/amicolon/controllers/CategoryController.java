@@ -8,7 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
@@ -25,7 +28,7 @@ public class CategoryController
 	}
 
 	@RequestMapping("/category/{id}")
-	public String getPanelPage(@PathVariable String id, Model model)
+	public String getCategoryPage(@PathVariable String id, Model model)
 	{
 		Category category = categoryService.findCategoryById(Long.valueOf(id));
 
@@ -39,7 +42,7 @@ public class CategoryController
 	{
 		model.addAttribute("category", new CategoryCommand());
 
-		return "forms/categoryform";
+		return "forms/category/categoryform";
 	}
 
 	@RequestMapping("/category/{id}/update")
@@ -47,11 +50,11 @@ public class CategoryController
 	{
 		model.addAttribute("category", categoryService.findCommandById(Long.valueOf(id)));
 
-		return "forms/categoryform";
+		return "forms/category/categoryform";
 	}
 
-	@PostMapping("forms")
-	public String saveOrUpdate(@ModelAttribute CategoryCommand categoryCommand)
+	@RequestMapping("forms/category/")
+	public String saveOrUpdateCategory(@ModelAttribute CategoryCommand categoryCommand)
 	{
 		CategoryCommand savedCategoryCommand = categoryService.saveCategoryCommand(categoryCommand);
 
@@ -63,7 +66,7 @@ public class CategoryController
 	{
 		log.debug("Deleting category id: " + id);
 		categoryService.deleteCategoryById(id);
-		
+
 		return "redirect:/panel";
 	}
 }

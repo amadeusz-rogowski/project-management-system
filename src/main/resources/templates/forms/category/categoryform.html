@@ -2,18 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Category form</title>
 </head>
 <body>
 
-<form th:object="${category}" th:action="@{/forms/}" method="post">
+<form th:object="${category}" th:action="@{/forms/category/}" method="post">
 
     <input type="hidden" th:field="*{id}"/>
 
     <input type="text" th:field="*{categoryName}">
 
+    <!-- TODO: img -->
     <input type="file" name="fileupload" value="fileupload" id="fileupload">
     <label for="fileupload"> Select a file to upload</label>
+
+    <!-- TODO: tasks list input hidden?-->
 
     <button type="submit" class="btn btn-primary">Submit</button>
 
