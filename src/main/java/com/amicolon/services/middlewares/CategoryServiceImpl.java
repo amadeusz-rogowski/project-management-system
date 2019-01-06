@@ -48,8 +48,17 @@ public class CategoryServiceImpl implements CategoryService
 		});
 	}
 
-	@Override
 	@Transactional
+	@Override
+	public CategoryCommand findCommandById(Long id)
+	{
+		Category foundCategory = findCategoryById(id);
+
+		return categoryToCategoryCommand.convert(foundCategory);
+	}
+
+	@Transactional
+	@Override
 	public CategoryCommand saveCategoryCommand(CategoryCommand categoryCommand)
 	{
 		Category converted = categoryCommandToCategory.convert(categoryCommand);

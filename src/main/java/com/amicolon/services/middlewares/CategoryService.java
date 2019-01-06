@@ -12,4 +12,6 @@ public interface CategoryService
 	Category findCategoryById(Long id);
 
 	CategoryCommand saveCategoryCommand(CategoryCommand categoryCommand);
+
+	CategoryCommand findCommandById(Long id);
 }

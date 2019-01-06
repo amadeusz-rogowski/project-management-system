@@ -28,7 +28,7 @@ public class CategoryController
 	@RequestMapping("/category/{id}")
 	public String getPanelPage(@PathVariable String id, Model model)
 	{
-		Category category = categoryService.findCategoryById(new Long(id));
+		Category category = categoryService.findCategoryById(Long.valueOf(id));
 
 		model.addAttribute("category", category);
 
@@ -39,6 +39,14 @@ public class CategoryController
 	public String newCategory(Model model)
 	{
 		model.addAttribute("category", new CategoryCommand());
+
+		return "forms/categoryform";
+	}
+
+	@RequestMapping("/category/{id}/update")
+	public String updateRecipe(@PathVariable String id, Model model)
+	{
+		model.addAttribute("category", categoryService.findCommandById(Long.valueOf(id)));
 
 		return "forms/categoryform";
 	}
