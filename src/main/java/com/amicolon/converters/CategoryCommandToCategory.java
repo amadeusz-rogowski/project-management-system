@@ -24,6 +24,7 @@ public class CategoryCommandToCategory implements Converter<CategoryCommand, Cat
 		category.setId(source.getId());
 		category.setCategoryName(source.getCategoryName());
 		category.setImage(source.getImage());
+		// TODO: forEach( task -> category.getTasks().add(
 		category.setTasks(source.getTasks());
 
 		return category;

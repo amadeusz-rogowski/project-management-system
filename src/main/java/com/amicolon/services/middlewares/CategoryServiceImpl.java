@@ -1,23 +1,33 @@
 package com.amicolon.services.middlewares;
 
+import com.amicolon.commands.CategoryCommand;
+import com.amicolon.converters.CategoryCommandToCategory;
+import com.amicolon.converters.CategoryToCategoryCommand;
 import com.amicolon.domain.Category;
 import com.amicolon.repositories.CategoryRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 public class CategoryServiceImpl implements CategoryService
 {
 	private final CategoryRepository categoryRepository;
+	private final CategoryCommandToCategory categoryCommandToCategory;
+	private final CategoryToCategoryCommand categoryToCategoryCommand;
 
 	@Autowired
-	public CategoryServiceImpl(CategoryRepository categoryRepository)
+	public CategoryServiceImpl(CategoryRepository categoryRepository, CategoryCommandToCategory categoryCommandToCategory, CategoryToCategoryCommand categoryToCategoryCommand)
 	{
 		this.categoryRepository = categoryRepository;
+		this.categoryCommandToCategory = categoryCommandToCategory;
+		this.categoryToCategoryCommand = categoryToCategoryCommand;
 	}
 
 	@Override
@@ -36,5 +46,17 @@ public class CategoryServiceImpl implements CategoryService
 		return categoryOptional.orElseGet(() -> {
 			throw new RuntimeException("Category not found in database");
 		});
+	}
+
+	@Override
+	@Transactional
+	public CategoryCommand saveCategoryCommand(CategoryCommand categoryCommand)
+	{
+		Category converted = categoryCommandToCategory.convert(categoryCommand);
+
+		Category saved = categoryRepository.save(converted);
+		log.debug("Saved category: " + saved.getId());
+
+		return categoryToCategoryCommand.convert(saved);
 	}
 }
