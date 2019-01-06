@@ -1,12 +1,15 @@
 package com.amicolon.controllers;
 
+import com.amicolon.commands.CategoryCommand;
 import com.amicolon.domain.Category;
 import com.amicolon.services.middlewares.CategoryService;
 import com.amicolon.services.middlewares.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -30,6 +33,22 @@ public class CategoryController
 		model.addAttribute("category", category);
 
 		return "category";
+	}
+
+	@RequestMapping("/category/new")
+	public String newCategory(Model model)
+	{
+		model.addAttribute("category", new CategoryCommand());
+
+		return "forms/categoryform";
+	}
+
+	@PostMapping("forms")
+	public String saveOrUpdate(@ModelAttribute CategoryCommand categoryCommand)
+	{
+		CategoryCommand savedCategoryCommand = categoryService.saveCategoryCommand(categoryCommand);
+
+		return "redirect:/panel";
 	}
 
 }
