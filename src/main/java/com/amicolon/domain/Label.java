@@ -1,5 +1,7 @@
 package com.amicolon.domain;
 
+import com.amicolon.domain.enumerated.LabelName;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 @Table(name = "label")
 public class Label
 {
@@ -17,6 +20,6 @@ public class Label
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "label_name")
-	private String labelName;
+	@Enumerated(EnumType.STRING)
+	private LabelName labelName;
 }
