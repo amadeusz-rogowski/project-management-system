@@ -4,7 +4,4 @@ public enum StateName
 {
 	ACTIVE, FINISHED, DELAYED;
 
-	StateName()
-	{
-	}
 }

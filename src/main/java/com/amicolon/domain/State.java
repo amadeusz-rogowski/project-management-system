@@ -1,12 +1,19 @@
 package com.amicolon.domain;
 
 import com.amicolon.domain.enumerated.StateName;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "state")
 public class State
 {
 	@Id
@@ -18,38 +25,4 @@ public class State
 
 	@OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
 	private Set<Task> tasks = new HashSet<>();
-
-	public State()
-	{
-	}
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
-
-	public StateName getStateName()
-	{
-		return stateName;
-	}
-
-	public void setStateName(StateName stateName)
-	{
-		this.stateName = stateName;
-	}
-
-	public Set<Task> getTasks()
-	{
-		return tasks;
-	}
-
-	public void setTasks(Set<Task> tasks)
-	{
-		this.tasks = tasks;
-	}
 }

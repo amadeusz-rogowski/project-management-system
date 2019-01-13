@@ -1,12 +1,19 @@
 package com.amicolon.domain;
 
 import com.amicolon.domain.enumerated.PriorityName;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "priority")
 public class Priority
 {
 	@Id
@@ -19,37 +26,4 @@ public class Priority
 	@OneToMany(mappedBy = "priority", fetch = FetchType.LAZY)
 	private Set<Task> tasks = new HashSet<>();
 
-	public Priority()
-	{
-	}
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
-
-	public PriorityName getPriorityName()
-	{
-		return priorityName;
-	}
-
-	public void setPriorityName(PriorityName priorityName)
-	{
-		this.priorityName = priorityName;
-	}
-
-	public Set<Task> getTasks()
-	{
-		return tasks;
-	}
-
-	public void setTasks(Set<Task> tasks)
-	{
-		this.tasks = tasks;
-	}
 }

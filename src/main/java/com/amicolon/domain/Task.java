@@ -1,6 +1,9 @@
 package com.amicolon.domain;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,18 +11,27 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"category"})
+@Table(name = "task")
 public class Task
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "title")
 	private String title;
+
+	@Column(name = "description")
 	@Lob
 	private String description;
 
+	@Column(name = "start_date")
 	private LocalDate startDate;
+	@Column(name = "finish_date")
 	private LocalDate finishDate;
 
 	@ManyToOne
@@ -36,100 +48,6 @@ public class Task
 	@ManyToOne
 	@JoinColumn(name="category_id", nullable=false)
 	private Category category;
-
-	public Task()
-	{
-	}
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
-
-	public String getTitle()
-	{
-		return title;
-	}
-
-	public void setTitle(String title)
-	{
-		this.title = title;
-	}
-
-	public String getDescription()
-	{
-		return description;
-	}
-
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
-
-	public LocalDate getStartDate()
-	{
-		return startDate;
-	}
-
-	public void setStartDate(LocalDate startDate)
-	{
-		this.startDate = startDate;
-	}
-
-	public LocalDate getFinishDate()
-	{
-		return finishDate;
-	}
-
-	public void setFinishDate(LocalDate finishDate)
-	{
-		this.finishDate = finishDate;
-	}
-
-	public State getState()
-	{
-		return state;
-	}
-
-	public void setState(State state)
-	{
-		this.state = state;
-	}
-
-	public Priority getPriority()
-	{
-		return priority;
-	}
-
-	public void setPriority(Priority priority)
-	{
-		this.priority = priority;
-	}
-
-	public Set<Label> getLabels()
-	{
-		return labels;
-	}
-
-	public void setLabels(Set<Label> labels)
-	{
-		this.labels = labels;
-	}
-
-	public Category getCategory()
-	{
-		return category;
-	}
-
-	public void setCategory(Category category)
-	{
-		this.category = category;
-	}
 
 	public Task addLabel(Label label)
 	{
