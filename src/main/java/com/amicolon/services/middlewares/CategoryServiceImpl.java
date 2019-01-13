@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -33,8 +33,9 @@ public class CategoryServiceImpl implements CategoryService
 	@Override
 	public Set<Category> getAllCategories()
 	{
-		Set<Category> categorySet = new HashSet<>();
+		Set<Category> categorySet = new LinkedHashSet<>();
 		categoryRepository.findAll().iterator().forEachRemaining(categorySet::add);
+
 		return categorySet;
 	}
 
@@ -48,9 +49,16 @@ public class CategoryServiceImpl implements CategoryService
 		});
 	}
 
+	@Override
+	public void deleteCategoryById(Long id)
+	{
+		categoryRepository.deleteById(id);
+		log.debug("Deleted category id: " + id);
+	}
+
 	@Transactional
 	@Override
-	public CategoryCommand findCommandById(Long id)
+	public CategoryCommand obtainCategoryCommandById(Long id)
 	{
 		Category foundCategory = findCategoryById(id);
 
@@ -59,7 +67,7 @@ public class CategoryServiceImpl implements CategoryService
 
 	@Transactional
 	@Override
-	public CategoryCommand saveCategoryCommand(CategoryCommand categoryCommand)
+	public CategoryCommand persistCategoryInDatabaseUsingCategoryCommand(CategoryCommand categoryCommand)
 	{
 		Category converted = categoryCommandToCategory.convert(categoryCommand);
 
@@ -67,11 +75,5 @@ public class CategoryServiceImpl implements CategoryService
 		log.debug("Saved category: " + saved.getId());
 
 		return categoryToCategoryCommand.convert(saved);
-	}
-
-	@Override
-	public void deleteCategoryById(Long id)
-	{
-		categoryRepository.deleteById(id);
 	}
 }
