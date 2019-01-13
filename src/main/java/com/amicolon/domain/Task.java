@@ -1,9 +1,6 @@
 package com.amicolon.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,6 +12,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"category"})
+@AllArgsConstructor
+@Builder
 @Table(name = "task")
 public class Task
 {

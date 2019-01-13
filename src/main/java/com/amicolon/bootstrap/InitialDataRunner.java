@@ -1,6 +1,7 @@
 package com.amicolon.bootstrap;
 
 import com.amicolon.domain.*;
+import com.amicolon.domain.enumerated.LabelName;
 import com.amicolon.domain.enumerated.PriorityName;
 import com.amicolon.domain.enumerated.StateName;
 import com.amicolon.repositories.*;
@@ -9,8 +10,10 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
 
+import static com.amicolon.domain.enumerated.LabelName.*;
 import static java.time.LocalDate.now;
 import static java.util.Arrays.asList;
 
@@ -40,39 +43,53 @@ public class InitialDataRunner implements ApplicationRunner
 	{
 		prepareEnums();
 
-		List<Category> categoryList = asList(prepareCategory("Main category 1"),
-				prepareCategory("Main category 2"),
-				prepareCategory("Main category 3"));
+		List<Category> categoryList = asList(prepareCategory("University"),
+				prepareCategory("Friends"),
+				prepareCategory("Sport"));
 
 		categoryRepository.saveAll(categoryList);
 	}
 
 	private Category prepareCategory(String catName)
 	{
-		Task task = new Task();
-		task.setTitle("test-task");
-		task.setDescription("making-test");
-		task.setStartDate(now());
-
-		Label school = new Label();
-		school.setLabelName("school");
-		labelRepository.save(school);
-
-		//task.addLabel(school);
-
-		task.setPriority(priorityRepository.findById(3L).get());
-
-		task.setState(stateRepository.findById(2L).get());
+		Task task1 = prepareTask("First task","drink water",2, getLabel(HEALTH), getLabel(DAILY));
+		Task task2 = prepareTask("Second task", "run every day",6,getLabel(DAILY),getLabel(HEALTH));
+		Task task3 = prepareTask("Exams are coming", "calculus exam",1,getLabel(EXAM),getLabel(TEST));
 
 		Category category = new Category();
 		category.setCategoryName(catName);
-
-		category.addTask(task);
+		category.addTask(task1);
+		category.addTask(task2);
+		category.addTask(task3);
 
 		categoryRepository.save(category);
-		taskRepository.save(task);
 
 		return category;
+	}
+
+	private Label getLabel(LabelName labelName)
+	{
+		return labelRepository.findByLabelName(labelName).get();
+	}
+
+	private Task prepareTask(/*Long id,*/String title, String desc, int months, Label enum1, Label enum2)
+	{
+
+		Task task = Task.builder()
+				.title(title)
+				.description(desc)
+				.startDate(now())
+				.finishDate(now().plusMonths(months))
+				.priority(priorityRepository.findById(3L).get())
+				.state(stateRepository.findById(1L).get())
+				.labels(new HashSet<>())
+				.build();
+
+		task.addLabel(enum1);
+		task.addLabel(enum2);
+
+		return task;
+
 	}
 
 	private void prepareEnums()
@@ -92,6 +109,14 @@ public class InitialDataRunner implements ApplicationRunner
 			Priority priority = new Priority();
 			priority.setPriorityName(priorityName);
 			priorityRepository.save(priority);
+		});
+
+		List<LabelName> labels = asList(LabelName.values());
+
+		labels.forEach(labelName -> {
+			Label label = new Label();
+			label.setLabelName(labelName);
+			labelRepository.save(label);
 		});
 	}
 
