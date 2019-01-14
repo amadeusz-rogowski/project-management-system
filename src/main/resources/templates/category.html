@@ -32,7 +32,7 @@
             <td th:text="${task.getPriority().getPriorityName()}"></td>
             <td th:text="${task.getLabels()}"></td>
             <td> Update</td>
-            <td> Delete</td>
+            <td><a th:href="@{'/category/' + ${category.getId()} + '/task/' + ${task.getId()} + '/delete'}">Delete</a></td>
         </tr>
     </tbody>
 </table>
