@@ -26,7 +26,8 @@ public class Category
 	@Column(name = "image")
 	private Byte[] image;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category", orphanRemoval = true)
+//	@JoinTable(name = "category_task", joinColumns = { @JoinColumn(name = "category_id") }, inverseJoinColumns = { @JoinColumn(name = "task_id") })
 	private Set<Task> tasks = new HashSet<>();
 
 	public Category addTask(Task task)

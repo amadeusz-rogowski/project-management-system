@@ -39,14 +39,13 @@ public class Task
 	@ManyToOne
 	private Priority priority;
 
+	@ManyToOne
+	private Category category;
+
 	@ManyToMany
 	@JoinTable(name = "task_label",
 		joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
 	private Set<Label> labels = new HashSet<>();
-
-	@ManyToOne
-	@JoinColumn(name="category_id", nullable=false)
-	private Category category;
 
 	public Task addLabel(Label label)
 	{
