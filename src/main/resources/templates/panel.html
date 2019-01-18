@@ -6,18 +6,20 @@
 </head>
 <body>
 
+<!-- TODO: backspace-->
+<!-- TODO: if empty do not list-->
+
     <h1>List of categories</h1>
 
-    <a href="#" th:href="@{'/category/new'}">
+    <a th:href="@{'/category/new'}">
         <h4>Add new category</h4>
     </a>
 
     <table>
         <tr th:each="category : ${categories}">
-            <td><a th:text="${category.getId()}"></a></td>
-            <td><a th:href="@{'category/' + ${category.getId()}}" th:text="${category.getCategoryName()}"></a></td>
-            <td><a th:href="@{'/category/' + ${category.getId()} + '/update'}">Update</a></td>
-            <td><a th:href="@{'/category/' + ${category.getId()} + '/delete'}">Delete</a></td>
+            <td><a th:href="@{'category/' + ${category.id}}" th:text="${category.categoryName}"></a></td>
+            <td><a th:href="@{'/category/' + ${category.id} + '/update'}">Update</a></td>
+            <td><a th:href="@{'/category/' + ${category.id} + '/delete'}">Delete</a></td>
         </tr>
     </table>
 

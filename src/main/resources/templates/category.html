@@ -8,9 +8,12 @@
 
 <h2 th:text="${category.getCategoryName()}"></h2>
 
-<a href="#" th:href="@{'/task/new'}">
+<a th:href="@{'/category/' + ${category.id} + '/task/new'}">
     <h4>Add new task</h4>
 </a>
+
+<!-- TODO: backspace-->
+<!-- TODO: if empty do not list-->
 
 <table>
     <thead>
