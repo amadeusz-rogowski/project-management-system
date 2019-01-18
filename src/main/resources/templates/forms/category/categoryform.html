@@ -10,14 +10,14 @@
 
     <input type="hidden" th:field="*{id}"/>
 
-    <input type="text" th:field="*{categoryName}">
-
+    <label for="category-name"> Name:</label>
+    <input type="text" name="category-name" th:field="*{categoryName}">
+    <br>
     <!-- TODO: img -->
-    <input type="file" name="fileupload" value="fileupload" id="fileupload">
     <label for="fileupload"> Select a file to upload</label>
-
-    <!-- TODO: tasks list input hidden?-->
-
+    <input type="file" name="fileupload" value="fileupload" id="fileupload">
+    <br>
+    <br>
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
