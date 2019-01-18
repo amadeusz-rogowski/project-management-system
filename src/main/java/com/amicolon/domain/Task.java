@@ -10,13 +10,13 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.joining;
 
+@Builder
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"category"})
 @AllArgsConstructor
-@Builder
 @Table(name = "task")
 public class Task
 {
@@ -47,7 +47,7 @@ public class Task
 
 	@ManyToMany
 	@JoinTable(name = "task_label",
-		joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
+			joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
 	private Set<Label> labels = new HashSet<>();
 
 	public Task addLabel(Label label)
