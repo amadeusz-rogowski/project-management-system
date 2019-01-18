@@ -2,7 +2,9 @@ package com.amicolon.converters;
 
 import com.amicolon.commands.TaskCommand;
 import com.amicolon.domain.Task;
+import com.amicolon.services.middlewares.CategoryService;
 import lombok.Synchronized;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskCommandToTask implements Converter<TaskCommand, Task>
 {
+
+	private final CategoryService categoryService;
+
+	@Autowired
+	public TaskCommandToTask(CategoryService categoryService)
+	{
+		this.categoryService = categoryService;
+	}
+
 	@Override
 	@Synchronized
 	@Nullable
@@ -19,18 +30,17 @@ public class TaskCommandToTask implements Converter<TaskCommand, Task>
 			return null;
 		}
 
-		final Task task = new Task();
-		task.setId(source.getId());
-		task.setTitle(source.getTitle());
-		task.setDescription(source.getDescription());
-		task.setStartDate(source.getStartDate());
-		task.setFinishDate(source.getFinishDate());
-		task.setPriority(source.getPriority());
-		task.setState(source.getState());
-		task.setLabels(source.getLabels());
-		task.setCategory(source.getCategory());
+		return Task.builder()
+				.id(source.getId())
+				.title(source.getTitle())
+				.description(source.getDescription())
+				.startDate(source.getStartDate())
+				.finishDate(source.getFinishDate())
+				.priority(source.getPriority())
+				.labels(source.getLabels())
+				.category(categoryService.findCategoryById(source.getCategoryId()))
+				.build();
 
-		return task;
 	}
 
 }

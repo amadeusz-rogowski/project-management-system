@@ -19,12 +19,11 @@ public class CategoryToCategoryCommand implements Converter<Category, CategoryCo
 			return null;
 		}
 
-		final CategoryCommand categoryCommand = new CategoryCommand();
-		categoryCommand.setId(source.getId());
-		categoryCommand.setCategoryName(source.getCategoryName());
-		categoryCommand.setImage(source.getImage());
-		categoryCommand.setTasks(source.getTasks());
-
-		return categoryCommand;
+		return CategoryCommand.builder()
+				.id(source.getId())
+				.categoryName(source.getCategoryName())
+				.image(source.getImage())
+				.tasks(source.getTasks())
+				.build();
 	}
 }

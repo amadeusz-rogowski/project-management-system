@@ -20,13 +20,11 @@ public class CategoryCommandToCategory implements Converter<CategoryCommand, Cat
 			return null;
 		}
 
-		final Category category = new Category();
-		category.setId(source.getId());
-		category.setCategoryName(source.getCategoryName());
-		category.setImage(source.getImage());
-		// TODO: forEach( task -> category.getTasks().add(
-		category.setTasks(source.getTasks());
-
-		return category;
+		return Category.builder()
+				.id(source.getId())
+				.categoryName(source.getCategoryName())
+				.image(source.getImage())
+				.tasks(source.getTasks())
+				.build();
 	}
 }

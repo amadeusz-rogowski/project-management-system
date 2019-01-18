@@ -19,17 +19,16 @@ public class TaskToTaskCommand implements Converter<Task, TaskCommand>
 			return null;
 		}
 
-		final TaskCommand taskCommand = new TaskCommand();
-		taskCommand.setId(source.getId());
-		taskCommand.setTitle(source.getTitle());
-		taskCommand.setDescription(source.getDescription());
-		taskCommand.setStartDate(source.getStartDate());
-		taskCommand.setFinishDate(source.getFinishDate());
-		taskCommand.setPriority(source.getPriority());
-		taskCommand.setState(source.getState());
-		taskCommand.setLabels(source.getLabels());
-		taskCommand.setCategory(source.getCategory());
-
-		return taskCommand;
+		return TaskCommand.builder()
+				.id(source.getId())
+				.categoryId(source.getCategory().getId())
+				.title(source.getTitle())
+				.description(source.getDescription())
+				.startDate(source.getStartDate())
+				.finishDate(source.getFinishDate())
+				.priority(source.getPriority())
+				.state(source.getState())
+				.labels(source.getLabels())
+				.build();
 	}
 }
