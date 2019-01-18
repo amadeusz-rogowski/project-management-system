@@ -59,7 +59,7 @@ public class CategoryController
 	@PostMapping("/forms/category")
 	public String saveOrUpdateCategory(@ModelAttribute CategoryCommand categoryCommand)
 	{
-		CategoryCommand savedCategoryCommand = categoryService.persistCategoryInDatabaseUsingCategoryCommand(categoryCommand);
+		categoryService.persistCategoryInDatabaseUsingCategoryCommand(categoryCommand);
 
 		return "redirect:/panel";
 	}

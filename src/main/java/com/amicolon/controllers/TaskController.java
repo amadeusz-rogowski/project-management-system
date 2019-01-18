@@ -1,9 +1,6 @@
 package com.amicolon.controllers;
 
-import com.amicolon.domain.Category;
-import com.amicolon.domain.Task;
-import com.amicolon.repositories.CategoryRepository;
-import com.amicolon.repositories.TaskRepository;
+import com.amicolon.services.middlewares.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,25 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TaskController
 {
-	private final CategoryRepository categoryRepository;
-	private final TaskRepository taskRepository;
+	private final TaskService taskService;
 
 	@Autowired
-	public TaskController(CategoryRepository categoryRepository, TaskRepository taskRepository)
+	public TaskController(TaskService taskService)
 	{
-		this.categoryRepository = categoryRepository;
-		this.taskRepository = taskRepository;
+		this.taskService = taskService;
 	}
 
 	@GetMapping
 	@RequestMapping("/category/{categoryId}/task/{taskId}/delete")
 	public String deleteTask(@PathVariable Long categoryId,@PathVariable Long taskId)
 	{
-		Task task = taskRepository.findById(taskId).get();
-		Category category = categoryRepository.findById(categoryId).get();
-		category.getTasks().remove(task);
-		categoryRepository.save(category);
+		taskService.deleteTaskByIdFromGivenCategoryWithId(categoryId, taskId);
 
-		return "redirect:/panel";
+		return "redirect:/category/" + categoryId;
 	}
 }

@@ -9,4 +9,6 @@ public interface TaskService
 	Set<Task> getAllTasks();
 
 	Task findTaskById(Long id);
+
+	void deleteTaskByIdFromGivenCategoryWithId(Long categoryId, Long taskId);
 }
