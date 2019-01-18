@@ -1,11 +1,14 @@
 package com.amicolon.domain;
 
+import com.amicolon.domain.enumerated.LabelName;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
+import static java.util.stream.Collectors.joining;
 
 @Entity
 @Getter
@@ -51,5 +54,13 @@ public class Task
 	{
 		this.getLabels().add(label);
 		return this;
+	}
+
+	public String getLabelNames()
+	{
+		return labels.stream()
+				.map(Label::getLabelName)
+				.map(LabelName::toString)
+				.collect(joining(","));
 	}
 }
