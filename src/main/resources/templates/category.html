@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${category.getCategoryName()}"></title>
+    <title th:text="${category.categoryName}"></title>
 </head>
 <body>
 
-<h2 th:text="${category.getCategoryName()}"></h2>
+<h2 th:text="${category.categoryName}"></h2>
 
 <a th:href="@{'/category/' + ${category.id} + '/task/new'}">
     <h4>Add new task</h4>
@@ -28,16 +28,19 @@
         </tr>
     </thead>
     <tbody>
-        <tr th:each="task : ${category.getTasks()}">
-            <td th:text="${task.getTitle()}"></td>
-            <td th:text="${task.getDescription()}"></td>
-            <td th:text="${task.getStartDate()}"></td>
-            <td th:text="${task.getFinishDate()}"></td>
-            <td th:text="${task.getState().getStateName()}"></td>
-            <td th:text="${task.getPriority().getPriorityName()}"></td>
-            <td th:text="${task.getLabelNames()}"></td>
-            <td><a th:href="@{'/category/' + ${category.getId()} + '/task/' + ${task.getId()} + '/update'}">Update</a></td>
-            <td><a th:href="@{'/category/' + ${category.getId()} + '/task/' + ${task.getId()} + '/delete'}">Delete</a></td>
+        <tr th:each="task : ${category.tasks}">
+            <td th:text="${task.title}"></td>
+            <td th:text="${task.description}"></td>
+            <td th:text="${task.startDate}"></td>
+            <td th:text="${task.finishDate}"></td>
+            <!--<td th:text="${task.getState().getStateName().getStateName()}"></td>-->
+            <td th:text="${task.state}"></td>
+            <!--<td th:text="${task.getPriority().getPriorityName()}"></td>-->
+            <td th:text="${task.priority}"></td>
+            <!--<td th:text="${task.getLabelNames()}"></td>-->
+            <td th:text="${task.labels}"></td>
+            <td><a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/update'}">Update</a></td>
+            <td><a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/delete'}">Delete</a></td>
         </tr>
     </tbody>
 </table>
