@@ -4,7 +4,7 @@ import com.amicolon.services.middlewares.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PanelController
@@ -17,7 +17,7 @@ public class PanelController
 		this.categoryService = categoryService;
 	}
 
-	@RequestMapping({"", "/", "/panel"})
+	@GetMapping({"", "/", "/panel"})
     public String getPanelPage(Model model)
     {
         model.addAttribute("categories", categoryService.getAllCategories());

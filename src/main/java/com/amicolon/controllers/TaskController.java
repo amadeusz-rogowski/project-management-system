@@ -5,7 +5,10 @@ import com.amicolon.services.middlewares.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import static java.time.LocalDate.now;
 
@@ -20,8 +23,7 @@ public class TaskController
 		this.taskService = taskService;
 	}
 
-	@GetMapping
-	@RequestMapping("/category/{categoryId}/task/{taskId}/delete")
+	@GetMapping("/category/{categoryId}/task/{taskId}/delete")
 	public String deleteTask(@PathVariable Long categoryId, @PathVariable Long taskId)
 	{
 		taskService.deleteTaskByIdFromGivenCategoryWithId(categoryId, taskId);
@@ -29,8 +31,7 @@ public class TaskController
 		return "redirect:/category/" + categoryId;
 	}
 
-	@GetMapping
-	@RequestMapping("/category/{id}/task/new")
+	@GetMapping("/category/{id}/task/new")
 	public String createNewTaskUsingTaskCommand(@PathVariable Long id, Model model)
 	{
 		TaskCommand taskCommand = new TaskCommand();
@@ -42,8 +43,7 @@ public class TaskController
 		return "forms/task/taskform";
 	}
 
-	@GetMapping
-	@RequestMapping("/category/{categoryId}/task/{taskId}/update")
+	@GetMapping("/category/{categoryId}/task/{taskId}/update")
 	public String updateTaskUsingTaskCommand(@PathVariable Long categoryId, @PathVariable Long taskId, Model model)
 	{
 		model.addAttribute("taskcommand", taskService.obtainTaskCommandById(taskId));
