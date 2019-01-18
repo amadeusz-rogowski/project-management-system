@@ -11,7 +11,7 @@ public interface CategoryService
 
 	Category findCategoryById(Long id);
 
-	CategoryCommand persistCategoryInDatabaseUsingCategoryCommand(CategoryCommand categoryCommand);
+	void persistCategoryInDatabaseUsingCategoryCommand(CategoryCommand categoryCommand);
 
 	CategoryCommand obtainCategoryCommandById(Long id);
 

@@ -22,9 +22,9 @@ public class CategoryController
 
 	@GetMapping
 	@RequestMapping("/category/{id}")
-	public String displayCategoryById(@PathVariable String id, Model model)
+	public String displayCategoryById(@PathVariable Long id, Model model)
 	{
-		model.addAttribute("category", categoryService.findCategoryById(Long.valueOf(id)));
+		model.addAttribute("category", categoryService.findCategoryById(id));
 
 		return "category";
 	}
@@ -49,9 +49,9 @@ public class CategoryController
 
 	@GetMapping
 	@RequestMapping("/category/{id}/update")
-	public String updateCategoryUsingCategoryCommand(@PathVariable String id, Model model)
+	public String updateCategoryUsingCategoryCommand(@PathVariable Long id, Model model)
 	{
-		model.addAttribute("categorycommand", categoryService.obtainCategoryCommandById(Long.valueOf(id)));
+		model.addAttribute("categorycommand", categoryService.obtainCategoryCommandById(id));
 
 		return "forms/category/categoryform";
 	}

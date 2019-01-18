@@ -67,13 +67,11 @@ public class CategoryServiceImpl implements CategoryService
 
 	@Transactional
 	@Override
-	public CategoryCommand persistCategoryInDatabaseUsingCategoryCommand(CategoryCommand categoryCommand)
+	public void persistCategoryInDatabaseUsingCategoryCommand(CategoryCommand categoryCommand)
 	{
 		Category converted = categoryCommandToCategory.convert(categoryCommand);
 
 		Category saved = categoryRepository.save(converted);
 		log.debug("Saved category: " + saved.getId());
-
-		return categoryToCategoryCommand.convert(saved);
 	}
 }
