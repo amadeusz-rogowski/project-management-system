@@ -1,14 +1,11 @@
 package com.amicolon.domain;
 
-import com.amicolon.domain.enumerated.LabelName;
+import com.amicolon.domain.enumerated.PriorityName;
+import com.amicolon.domain.enumerated.StateName;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-
-import static java.util.stream.Collectors.joining;
 
 @Builder
 @Entity
@@ -36,31 +33,31 @@ public class Task
 	@Column(name = "finish_date")
 	private LocalDate finishDate;
 
-	@ManyToOne
-	private State state;
+	@Enumerated(EnumType.STRING)
+	private PriorityName priorityName;
 
-	@ManyToOne
-	private Priority priority;
+	@Enumerated(EnumType.STRING)
+	private StateName stateName;
 
 	@ManyToOne
 	private Category category;
 
-	@ManyToMany
-	@JoinTable(name = "task_label",
-			joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
-	private Set<Label> labels = new HashSet<>();
-
-	public Task addLabel(Label label)
-	{
-		this.getLabels().add(label);
-		return this;
-	}
-
-	public String getLabelNames()
-	{
-		return labels.stream()
-				.map(Label::getLabelName)
-				.map(LabelName::toString)
-				.collect(joining(","));
-	}
+//	@ManyToMany
+//	@JoinTable(name = "task_label",
+//			joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
+//	private Set<Label> labels = new HashSet<>();
+//
+//	public Task addLabel(Label label)
+//	{
+//		this.getLabels().add(label);
+//		return this;
+//	}
+//
+//	public String getLabelNames()
+//	{
+//		return labels.stream()
+//				.map(Label::getLabelName)
+//				.map(LabelName::toString)
+//				.collect(joining(","));
+//	}
 }
