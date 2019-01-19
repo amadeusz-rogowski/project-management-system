@@ -24,7 +24,7 @@
             <th>Finish Date</th>
             <th>State</th>
             <th>Priority</th>
-            <th>Labels</th>
+            <!--<th>Labels</th>-->
         </tr>
     </thead>
     <tbody>
@@ -33,12 +33,10 @@
             <td th:text="${task.description}"></td>
             <td th:text="${task.startDate}"></td>
             <td th:text="${task.finishDate}"></td>
-            <!--<td th:text="${task.getState().getStateName().getStateName()}"></td>-->
             <td th:text="${task.state}"></td>
-            <!--<td th:text="${task.getPriority().getPriorityName()}"></td>-->
             <td th:text="${task.priority}"></td>
             <!--<td th:text="${task.getLabelNames()}"></td>-->
-            <td th:text="${task.labels}"></td>
+            <!--<td th:text="${task.labels}"></td>-->
             <td><a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/update'}">Update</a></td>
             <td><a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/delete'}">Delete</a></td>
         </tr>
