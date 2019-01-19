@@ -23,7 +23,6 @@ public class CategoryCommandToCategory implements Converter<CategoryCommand, Cat
 		return Category.builder()
 				.id(source.getId())
 				.categoryName(source.getCategoryName())
-				.image(source.getImage())
 				.tasks(source.getTasks())
 				.build();
 	}

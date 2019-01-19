@@ -22,7 +22,6 @@ public class CategoryToCategoryCommand implements Converter<Category, CategoryCo
 		return CategoryCommand.builder()
 				.id(source.getId())
 				.categoryName(source.getCategoryName())
-				.image(source.getImage())
 				.tasks(source.getTasks())
 				.build();
 	}
