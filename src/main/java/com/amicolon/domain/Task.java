@@ -1,7 +1,7 @@
 package com.amicolon.domain;
 
-import com.amicolon.domain.enumerated.PriorityName;
-import com.amicolon.domain.enumerated.StateName;
+import com.amicolon.domain.enumerated.Priority;
+import com.amicolon.domain.enumerated.State;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,10 +34,10 @@ public class Task
 	private LocalDate finishDate;
 
 	@Enumerated(EnumType.STRING)
-	private PriorityName priorityName;
+	private Priority priority;
 
 	@Enumerated(EnumType.STRING)
-	private StateName stateName;
+	private State state;
 
 	@ManyToOne
 	private Category category;

@@ -2,8 +2,8 @@ package com.amicolon.bootstrap;
 
 import com.amicolon.domain.Category;
 import com.amicolon.domain.Task;
-import com.amicolon.domain.enumerated.PriorityName;
-import com.amicolon.domain.enumerated.StateName;
+import com.amicolon.domain.enumerated.Priority;
+import com.amicolon.domain.enumerated.State;
 import com.amicolon.repositories.CategoryRepository;
 import com.amicolon.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,8 +68,8 @@ public class InitialDataRunner implements ApplicationRunner
 				.description(desc)
 				.startDate(now())
 				.finishDate(now().plusMonths(months))
-				.priorityName(PriorityName.LOW)
-				.stateName(StateName.ACTIVE)
+				.priority(Priority.LOW)
+				.state(State.ACTIVE)
 //				.labels(new HashSet<>())
 				.build();
 

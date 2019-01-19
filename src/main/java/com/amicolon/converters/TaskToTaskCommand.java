@@ -26,8 +26,8 @@ public class TaskToTaskCommand implements Converter<Task, TaskCommand>
 				.description(source.getDescription())
 				.startDate(source.getStartDate())
 				.finishDate(source.getFinishDate())
-				.priority(source.getPriorityName())
-				.state(source.getStateName())
+				.priority(source.getPriority())
+				.state(source.getState())
 //				.labels(source.getLabels())
 				.build();
 	}

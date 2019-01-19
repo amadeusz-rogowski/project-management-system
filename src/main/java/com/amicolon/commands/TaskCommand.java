@@ -1,7 +1,7 @@
 package com.amicolon.commands;
 
-import com.amicolon.domain.enumerated.PriorityName;
-import com.amicolon.domain.enumerated.StateName;
+import com.amicolon.domain.enumerated.Priority;
+import com.amicolon.domain.enumerated.State;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,8 +18,8 @@ public class TaskCommand
 	private String description;
 	private LocalDate startDate;
 	private LocalDate finishDate;
-	private StateName state;
-	private PriorityName priority;
+	private State state;
+	private Priority priority;
 //	private Set<Label> labels = new HashSet<>();
 	private Long categoryId;
 }
