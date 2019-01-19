@@ -20,15 +20,27 @@
     <input type="text" name="task-description" th:field="*{description}">
     <br>
 
-    <input type="hidden" th:field="*{finishDate}"/>
+    <input type="date" th:value="*{finishDate}" th:field="*{finishDate}"/>
     <br>
 
-    <input type="hidden" th:field="*{state}"/>
+
+    <label>State:</label>
+    <select th:field="*{state}">
+        <option th:each="stateValue : ${T(com.amicolon.domain.enumerated.State).values()}"
+                th:value="${stateValue.name()}"
+                th:text="${stateValue.name()}"
+        >val</option>
+    </select>
     <br>
-    <input type="hidden" th:field="*{priority}"/>
+
+    <label>Priority:</label>
+    <select th:field="*{priority}">
+        <option th:each="priorityValue : ${T(com.amicolon.domain.enumerated.Priority).values()}"
+                th:value="${priorityValue.name()}"
+                th:text="${priorityValue.name()}"
+        >val</option>
+    </select>
     <br>
-    <!--<input type="hidden" th:field="*{labels}"/>-->
-    <!--<br>-->
 
     <button type="submit" class="btn btn-primary">Submit</button>
 

@@ -7,6 +7,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
+
 @Component
 public class TaskToTaskCommand implements Converter<Task, TaskCommand>
 {
@@ -25,7 +27,7 @@ public class TaskToTaskCommand implements Converter<Task, TaskCommand>
 				.title(source.getTitle())
 				.description(source.getDescription())
 				.startDate(source.getStartDate())
-				.finishDate(source.getFinishDate())
+				.finishDate(source.getFinishDate().format(ISO_LOCAL_DATE))
 				.priority(source.getPriority())
 				.state(source.getState())
 //				.labels(source.getLabels())

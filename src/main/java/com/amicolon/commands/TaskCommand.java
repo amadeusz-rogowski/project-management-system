@@ -17,7 +17,7 @@ public class TaskCommand
 	private String title;
 	private String description;
 	private LocalDate startDate;
-	private LocalDate finishDate;
+	private String finishDate;
 	private State state;
 	private Priority priority;
 //	private Set<Label> labels = new HashSet<>();
