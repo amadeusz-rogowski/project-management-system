@@ -6,20 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-
-@Entity
+//@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-@Table(name = "label")
+//@Table(name = "label")
 public class Label
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Enumerated(EnumType.STRING)
+//	@Enumerated(EnumType.STRING)
 	private LabelName labelName;
 }
