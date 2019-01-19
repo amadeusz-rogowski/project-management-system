@@ -5,7 +5,6 @@ import com.amicolon.domain.Task;
 import com.amicolon.domain.enumerated.Priority;
 import com.amicolon.domain.enumerated.State;
 import com.amicolon.repositories.CategoryRepository;
-import com.amicolon.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -19,19 +18,16 @@ import static java.util.Arrays.asList;
 @Component
 public class InitialDataRunner implements ApplicationRunner
 {
-	private final TaskRepository taskRepository;
-
 	private final CategoryRepository categoryRepository;
 
 	@Autowired
-	public InitialDataRunner(TaskRepository taskRepository, CategoryRepository categoryRepository)
+	public InitialDataRunner(CategoryRepository categoryRepository)
 	{
-		this.taskRepository = taskRepository;
 		this.categoryRepository = categoryRepository;
 	}
 
 	@Override
-	public void run(ApplicationArguments args) throws Exception
+	public void run(ApplicationArguments args)
 	{
 		List<Category> categoryList = asList(prepareCategory("University"),
 				prepareCategory("Friends"),
@@ -57,12 +53,8 @@ public class InitialDataRunner implements ApplicationRunner
 		return category;
 	}
 
-	private Task prepareTask(/*Long id,*/String title, String desc, int months/*, Label enum1, Label enum2*/)
+	private Task prepareTask(String title, String desc, int months)
 	{
-
-		//		task.addLabel(enum1);
-//		task.addLabel(enum2);
-
 		return Task.builder()
 				.title(title)
 				.description(desc)
@@ -70,14 +62,6 @@ public class InitialDataRunner implements ApplicationRunner
 				.finishDate(now().plusMonths(months))
 				.priority(Priority.LOW)
 				.state(State.ACTIVE)
-//				.labels(new HashSet<>())
 				.build();
-
 	}
-
-	//	private Label getLabel(LabelName labelName)
-//	{
-//		return labelRepository.findByLabelName(labelName).get();
-//	}
-
 }

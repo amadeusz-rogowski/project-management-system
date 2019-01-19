@@ -22,10 +22,6 @@ public class Category
 	@Column(name = "category_name")
 	private String categoryName;
 
-	@Lob
-	@Column(name = "image")
-	private Byte[] image;
-
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category", orphanRemoval = true)
 	private Set<Task> tasks = new HashSet<>();
 

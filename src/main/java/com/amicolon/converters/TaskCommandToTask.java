@@ -42,7 +42,6 @@ public class TaskCommandToTask implements Converter<TaskCommand, Task>
 				.finishDate(LocalDate.parse(source.getFinishDate(), ISO_LOCAL_DATE))
 				.priority(source.getPriority())
 				.state(source.getState())
-//				.labels(source.getLabels())
 				.category(categoryService.findCategoryById(source.getCategoryId()))
 				.build();
 

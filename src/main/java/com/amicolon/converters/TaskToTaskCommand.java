@@ -30,7 +30,6 @@ public class TaskToTaskCommand implements Converter<Task, TaskCommand>
 				.finishDate(source.getFinishDate().format(ISO_LOCAL_DATE))
 				.priority(source.getPriority())
 				.state(source.getState())
-//				.labels(source.getLabels())
 				.build();
 	}
 }

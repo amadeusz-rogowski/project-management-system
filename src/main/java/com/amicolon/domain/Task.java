@@ -45,23 +45,4 @@ public class Task
 
 	@ManyToOne
 	private Category category;
-
-//	@ManyToMany
-//	@JoinTable(name = "task_label",
-//			joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
-//	private Set<Label> labels = new HashSet<>();
-//
-//	public Task addLabel(Label label)
-//	{
-//		this.getLabels().add(label);
-//		return this;
-//	}
-//
-//	public String getLabelNames()
-//	{
-//		return labels.stream()
-//				.map(Label::getLabelName)
-//				.map(LabelName::toString)
-//				.collect(joining(","));
-//	}
 }

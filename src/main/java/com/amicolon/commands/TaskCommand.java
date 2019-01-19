@@ -20,6 +20,5 @@ public class TaskCommand
 	private String finishDate;
 	private State state;
 	private Priority priority;
-//	private Set<Label> labels = new HashSet<>();
 	private Long categoryId;
 }
