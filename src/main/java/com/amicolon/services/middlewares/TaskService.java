@@ -12,4 +12,6 @@ public interface TaskService
 	void persistTaskInDatabaseUsingTaskCommand(TaskCommand taskCommand);
 
 	TaskCommand obtainTaskCommandById(Long id);
+
+	void finishTaskByIdFromGivenCategoryWithId(Long categoryId, Long taskId);
 }

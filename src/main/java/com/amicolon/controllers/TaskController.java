@@ -31,6 +31,14 @@ public class TaskController
 		return "redirect:/category/" + categoryId;
 	}
 
+	@GetMapping("/category/{categoryId}/task/{taskId}/finish")
+	public String finishTask(@PathVariable Long categoryId, @PathVariable Long taskId)
+	{
+		taskService.finishTaskByIdFromGivenCategoryWithId(categoryId, taskId);
+
+		return "redirect:/category/" + categoryId;
+	}
+
 	@GetMapping("/category/{id}/task/new")
 	public String createNewTaskUsingTaskCommand(@PathVariable Long id, Model model)
 	{

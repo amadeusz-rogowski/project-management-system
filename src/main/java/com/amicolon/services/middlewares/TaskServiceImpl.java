@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
+import static com.amicolon.domain.enumerated.State.FINISHED;
+
 @Slf4j
 @Service
 public class TaskServiceImpl implements TaskService
@@ -62,6 +64,16 @@ public class TaskServiceImpl implements TaskService
 		category.getTasks().remove(task);
 		categoryRepository.save(category);
 		log.debug("Deleted category id: " + taskId);
+	}
+
+	@Override
+	public void finishTaskByIdFromGivenCategoryWithId(Long categoryId, Long taskId)
+	{
+		Task task = taskRepository.findById(taskId).get();
+
+		task.setState(FINISHED);
+
+		taskRepository.save(task);
 	}
 
 	@Transactional

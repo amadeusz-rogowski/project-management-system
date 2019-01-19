@@ -12,7 +12,6 @@
     <h4>Add new task</h4>
 </a>
 
-<!-- TODO: backspace-->
 <!-- TODO: if empty do not list-->
 
 <table>
@@ -24,7 +23,7 @@
             <th>Finish Date</th>
             <th>State</th>
             <th>Priority</th>
-            <!--<th>Labels</th>-->
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -35,10 +34,13 @@
             <td th:text="${task.finishDate}"></td>
             <td th:text="${task.state}"></td>
             <td th:text="${task.priority}"></td>
-            <!--<td th:text="${task.getLabelNames()}"></td>-->
-            <!--<td th:text="${task.labels}"></td>-->
-            <td><a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/update'}">Update</a></td>
-            <td><a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/delete'}">Delete</a></td>
+            <td>
+                <a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/update'}">Update</a>
+                 |
+                <a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/finish'}">Finish</a>
+                 |
+                <a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/delete'}">Delete</a>
+            </td>
         </tr>
     </tbody>
 </table>
