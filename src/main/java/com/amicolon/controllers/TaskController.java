@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static com.amicolon.domain.enumerated.State.ACTIVE;
 import static java.time.LocalDate.now;
 
 @Controller
@@ -45,6 +46,7 @@ public class TaskController
 		TaskCommand taskCommand = new TaskCommand();
 		taskCommand.setCategoryId(id);
 		taskCommand.setStartDate(now());
+		taskCommand.setState(ACTIVE);
 
 		model.addAttribute("taskcommand", taskCommand);
 
