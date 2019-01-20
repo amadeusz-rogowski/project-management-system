@@ -1,0 +1,13 @@
+#nav-links, #nav-links:hover{
+    color:white;
+    text-decoration: none;
+}
+
+.category-position,.task-form {
+    padding:10%;
+    margin-left: 25em;
+}
+
+.submit-button{
+    margin-left: 6em;
+}
