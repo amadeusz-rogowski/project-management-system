@@ -28,8 +28,7 @@
 <h1>List of categories</h1>
 
 <div sec:authorize="hasRole('ROLE_ADMIN')">
-    <a th:href="@{'/category/new'}" th:text="Add new category"></a>
-
+    <a th:href="@{'/category/new'}"><h4>Add new category</h4></a>
 </div>
 
 <!--<a th:href="@{'/category/new'}"><h4>Add new category</h4></a>-->
