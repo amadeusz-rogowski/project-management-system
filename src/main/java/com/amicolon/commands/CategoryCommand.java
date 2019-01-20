@@ -15,6 +15,5 @@ public class CategoryCommand
 {
 	private Long id;
 	private String categoryName;
-	private Byte[] image;
 	private Set<Task> tasks = new HashSet<>();
 }

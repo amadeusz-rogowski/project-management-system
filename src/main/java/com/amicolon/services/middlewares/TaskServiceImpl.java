@@ -35,31 +35,25 @@ public class TaskServiceImpl implements TaskService
 	}
 
 	@Override
-	public Task findTaskById(Long id) throws RuntimeException
+	public Task findTaskById(Long id)
 	{
 		Optional<Task> taskOptional = taskRepository.findById(id);
 
-//		return taskOptional.orElseThrow(() -> {
-//			throw new RuntimeException("Task #" + id + " not found in database");
-//		});
-
-		return taskOptional.get();
+		return taskOptional.orElseGet(() -> {
+			throw new RuntimeException("Task #" + id + " not found in database");
+		});
 	}
 
 	@Override
 	public void deleteTaskByIdFromGivenCategoryWithId(Long categoryId, Long taskId) throws RuntimeException
 	{
-//		Task task = taskRepository.findById(taskId).orElseThrow(() -> {
-//			throw new RuntimeException("Task #" + taskId + " not found in database");
-//		});
-//
-//		Category category = categoryRepository.findById(categoryId).orElseThrow(() -> {
-//			throw new RuntimeException("Category #" + categoryId + " not found in database");
-//		});
+		Task task = taskRepository.findById(taskId).orElseGet(() -> {
+			throw new RuntimeException("Task #" + taskId + " not found in database");
+		});
 
-		Task task = taskRepository.findById(taskId).get();
-
-		Category category = categoryRepository.findById(categoryId).get();
+		Category category = categoryRepository.findById(categoryId).orElseGet(() -> {
+			throw new RuntimeException("Category #" + categoryId + " not found in database");
+		});
 
 		category.getTasks().remove(task);
 		categoryRepository.save(category);
@@ -69,7 +63,9 @@ public class TaskServiceImpl implements TaskService
 	@Override
 	public void finishTaskByIdFromGivenCategoryWithId(Long categoryId, Long taskId)
 	{
-		Task task = taskRepository.findById(taskId).get();
+		Task task = taskRepository.findById(taskId).orElseGet(() -> {
+			throw new RuntimeException("Task #" + taskId + " not found in database");
+		});
 
 		task.setState(FINISHED);
 

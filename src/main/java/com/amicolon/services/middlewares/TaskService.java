@@ -7,7 +7,7 @@ public interface TaskService
 {
 	Task findTaskById(Long id);
 
-	void deleteTaskByIdFromGivenCategoryWithId(Long categoryId, Long taskId) throws RuntimeException;
+	void deleteTaskByIdFromGivenCategoryWithId(Long categoryId, Long taskId);
 
 	void persistTaskInDatabaseUsingTaskCommand(TaskCommand taskCommand);
 
