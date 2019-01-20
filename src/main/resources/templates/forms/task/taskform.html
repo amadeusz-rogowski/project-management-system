@@ -22,6 +22,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/validations.js"></script>
+    <script type="text/javascript" src="/js/logout.js"></script>
+
+
 </head>
 <body>
 
@@ -34,7 +39,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-            <li><a id="nav-links" th:href="@{'/panel'}"><i class="fas fa-arrow-left"></i> Back</a></li>
+            <li><a id="nav-links" th:href="@{'/category/' + ${taskcommand.categoryId}}"><i class="fas fa-arrow-left"></i> Back</a></li>
             </li>
         </ul>
 
@@ -42,7 +47,8 @@
             <li>
                 <form class="form-position" method="post" th:action="@{/logout}">
                     <label class="col-md-4 control-label" for="submit"></label>
-                    <input type="submit" id="submit" value="Logout" name="submit" class="btn btn-primary btn-login"/>
+                    <input onclick="return onLogout()" type="submit" id="submit" value="Logout" name="submit"
+                           class="btn btn-primary btn-login"/>
                 </form>
             </li>
         </ul>
@@ -52,7 +58,8 @@
 
 <div class="container task-form">
 
-    <form th:object="${taskcommand}" th:action="@{/forms/task/}" method="post">
+    <form name="taskForm" th:object="${taskcommand}" th:action="@{/forms/task/}" method="post"
+          onsubmit="return validateTask()">
         <input type="hidden" th:field="*{id}"/>
         <input type="hidden" th:field="*{categoryId}"/>
         <input type="hidden" th:field="*{startDate}"/>
@@ -60,7 +67,7 @@
         <div class="form-group row">
             <label for="task-title"> Title:</label>
             <div>
-                <input type="text" name="task-title" th:field="*{title}" placeholder="Title">
+                <input id="title" type="text" name="task-title" th:field="*{title}" placeholder="Title">
             </div>
         </div>
 
@@ -68,7 +75,8 @@
         <div class="form-group row">
             <label for="task-description"> Description:</label>
             <div>
-                <input type="text" name="task-description" th:field="*{description}" placeholder="Description">
+                <input id="description" type="text" name="task-description" th:field="*{description}"
+                       placeholder="Description">
             </div>
         </div>
 
@@ -82,13 +90,14 @@
         <input type="hidden" th:field="*{state}"/>
 
         <div class="form-group row">
-        <label>Priority:</label>
-        <select th:field="*{priority}">
-            <option th:each="priorityValue : ${T(com.amicolon.domain.enumerated.Priority).values()}"
-                    th:value="${priorityValue.name()}"
-                    th:text="${priorityValue.name()}"
-            >val</option>
-        </select>
+            <label>Priority:</label>
+            <select th:field="*{priority}">
+                <option th:each="priorityValue : ${T(com.amicolon.domain.enumerated.Priority).values()}"
+                        th:value="${priorityValue.name()}"
+                        th:text="${priorityValue.name()}"
+                >val
+                </option>
+            </select>
         </div>
 
 
@@ -101,5 +110,6 @@
     </form>
 
 </div>
+
 </body>
 </html>

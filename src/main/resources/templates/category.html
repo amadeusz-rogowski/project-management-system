@@ -18,7 +18,10 @@
             crossorigin="anonymous"></script>
 
     <link type="text/css" rel="stylesheet" href="/css/panel.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/nav.css"/>
     <link type="text/css" rel="stylesheet" href="/css/category.css"/>
+    <script type="text/javascript" src="/js/logout.js"></script>
+
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -26,24 +29,6 @@
 
 </head>
 <body>
-
-<!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
-<!--This will only be displayed if authenticated user has role ROLE_ADMIN.-->
-<!--</div>-->
-
-<!--&lt;!&ndash;<div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">&ndash;&gt;-->
-<!--&lt;!&ndash;This will only be displayed if authenticated user has role ROLE_ADMIN.&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-<!--<div sec:authorize-url="/panel">-->
-<!--This will only be displayed if authenticated user can call the "/panel" URL.-->
-<!--</div>-->
-
-<!--<div th:text="${#authentication.name}">-->
-<!--The value of the "name" property of the authentication object should appear here.-->
-<!--</div>-->
-
-<!--<span th:text="${#authentication.getPrincipal().getUsername()}"></span>-->
 
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
     <a th:text="${category.categoryName}" class="navbar-brand" href="#">Category</a>
@@ -63,7 +48,8 @@
             <li>
                 <form class="form-position" method="post" th:action="@{/logout}">
                     <label class="col-md-4 control-label" for="submit"></label>
-                    <input type="submit" id="submit" value="Logout" name="submit" class="btn btn-primary btn-login"/>
+                    <input onclick="return onLogout()" type="submit" id="submit" value="Logout" name="submit"
+                           class="btn btn-primary btn-login"/>
                 </form>
             </li>
         </ul>
@@ -99,15 +85,19 @@
             <td th:text="${task.state}"></td>
             <td th:text="${task.priority}"></td>
             <td>
-                <a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/update'}"><i class="fas fa-sync-alt"></i> Update</a>
+                <a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/update'}"><i
+                        class="fas fa-sync-alt"></i> Update</a>
                 |
-                <a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/finish'}"><i class="fas fa-check"></i> Finish</a>
+                <a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/finish'}"><i
+                        class="fas fa-check"></i> Finish</a>
                 |
-                <a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/delete'}"><i class="fas fa-trash-alt"></i> Delete</a>
+                <a th:href="@{'/category/' + ${category.id} + '/task/' + ${task.id} + '/delete'}"><i
+                        class="fas fa-trash-alt"></i> Delete</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+
 </body>
 </html>

@@ -23,6 +23,9 @@
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
 
+    <script type="text/javascript" src="/js/validations.js"></script>
+    <script type="text/javascript" src="/js/logout.js"></script>
+
 </head>
 <body>
 
@@ -43,7 +46,8 @@
             <li>
                 <form class="form-position" method="post" th:action="@{/logout}">
                     <label class="col-md-4 control-label" for="submit"></label>
-                    <input type="submit" id="submit" value="Logout" name="submit" class="btn btn-primary btn-login"/>
+                    <input onclick="return onLogout()" type="submit" id="submit" value="Logout" name="submit"
+                           class="btn btn-primary btn-login"/>
                 </form>
             </li>
         </ul>
@@ -52,19 +56,19 @@
 </nav>
 
 <div class="container category-position">
-    <form th:object="${categorycommand}" th:action="@{/forms/category/}" method="post">
+    <form name="categoryForm" th:object="${categorycommand}" th:action="@{/forms/category/}" method="post"
+          onsubmit="return validateCategory()">
 
         <input type="hidden" th:field="*{id}"/>
 
         <label for="category-name"> Name:</label>
-        <input type="text" name="category-name" th:field="*{categoryName}">
+        <input id="categoryName" type="text" name="category-name" th:field="*{categoryName}">
         <br>
 
         <button type="submit" class="btn btn-secondary submit-button">Submit</button>
     </form>
 
 </div>
-
 
 </body>
 </html>

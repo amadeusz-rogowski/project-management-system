@@ -16,6 +16,7 @@
             crossorigin="anonymous"></script>
 
     <link type="text/css" rel="stylesheet" href="/css/login.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/nav.css"/>
     <link type="text/css" rel="stylesheet" href="/css/panel.css"/>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
@@ -26,29 +27,45 @@
 <body>
 
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">User login</a>
+    <a class="navbar-brand" href="#">Login page</a>
 </nav>
 
 <div class="container" style="
     padding: 10%;
 ">
-        <form method="post" th:action="@{/login}">
+    <form method="post" th:action="@{/login}">
 
-            <label class="col-md-4 control-label" for="username">Username</label>
+        <label class="col-md-4 control-label" for="username">Username</label>
 
-            <input id="username" name="username" type="text" placeholder="Username" class="form-control input-md"
-                   required/>
+        <input id="username" name="username" type="text" placeholder="Username" class="form-control input-md"
+               required/>
 
-            <label class="col-md-4 control-label" for="password">Password</label>
+        <label class="col-md-4 control-label" for="password">Password</label>
 
-            <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md"
-                   required/>
+        <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md"
+               required/>
 
-            <label class="col-md-4 control-label" for="submit"></label>
-            <input type="submit" id="submit" value="Login" name="submit" class="btn btn-primary btn-login"/>
+        <input type="submit"
+               id="submit"
+               value="Login"
+               name="submit"
+               class="btn btn-primary btn-login submit-button"
+               style="width: 50%;
+                margin-left: 13em;
+                margin-top: 0.5em;
+                background: #484c51;
+                border: none;"
+        />
 
-        </form>
+    </form>
 </div>
+
+<footer class="page-footer font-small">
+    <div class="footer-copyright text-center py-3">
+        © 2019 Copyright: Amadeusz Rogowski
+    </div>
+</footer>
+
 </body>
 
 </html>
