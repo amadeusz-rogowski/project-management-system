@@ -6,6 +6,18 @@
 </head>
 <body>
 
+
+<form class="form-horizontal" method="post" th:action="@{/logout}">
+        <!-- Button -->
+        <label class="col-md-4 control-label" for="submit"></label>
+        <input type="submit" id="submit" value="Logout" name="submit" class="btn btn-primary btn-login"/>
+</form>
+
+<!--<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">-->
+    <!--This will only be displayed if authenticated user has role ROLE_ADMIN.-->
+<!--</div>-->
+
+
 <!-- TODO: backspace-->
 <!-- TODO: if empty do not list-->
 
