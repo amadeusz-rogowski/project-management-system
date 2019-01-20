@@ -1,37 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Panel</title>
 </head>
 <body>
 
+<!--<div sec:authorize="hasRole('ROLE_USER')">Text visible to user.</div>-->
+<!--<div sec:authorize="hasRole('ROLE_ADMIN')">Text visible to admin.</div>-->
+<!--<div sec:authorize="isAuthenticated()">-->
+    <!--Text visible only to authenticated users.-->
+<!--</div>-->
+<!--Authenticated username:-->
+<!--<div sec:authentication="name"></div>-->
+<!--Authenticated user roles:-->
+<!--<div sec:authentication="principal.authorities"></div>-->
 
 <form class="form-horizontal" method="post" th:action="@{/logout}">
-        <!-- Button -->
-        <label class="col-md-4 control-label" for="submit"></label>
-        <input type="submit" id="submit" value="Logout" name="submit" class="btn btn-primary btn-login"/>
+    <!-- Button -->
+    <label class="col-md-4 control-label" for="submit"></label>
+    <input type="submit" id="submit" value="Logout" name="submit" class="btn btn-primary btn-login"/>
 </form>
 
-<!--<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">-->
-    <!--This will only be displayed if authenticated user has role ROLE_ADMIN.-->
-<!--</div>-->
+<h2>Welcome</h2>
 
+<h1>List of categories</h1>
 
-<!-- TODO: backspace-->
-<!-- TODO: if empty do not list-->
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{'/category/new'}" th:text="Add new category"></a>
 
-    <h1>List of categories</h1>
+</div>
 
-    <a th:href="@{'/category/new'}">
-        <h4>Add new category</h4>
-    </a>
+<!--<a th:href="@{'/category/new'}"><h4>Add new category</h4></a>-->
 
-    <table>
+<table>
         <tr th:each="category : ${categories}">
             <td><a th:href="@{'category/' + ${category.id}}" th:text="${category.categoryName}"></a></td>
-            <td><a th:href="@{'/category/' + ${category.id} + '/update'}">Update</a></td>
-            <td><a th:href="@{'/category/' + ${category.id} + '/delete'}">Delete</a></td>
+
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <td><a th:href="@{'/category/' + ${category.id} + '/update'}">Update</a></td>
+            </div>
+
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <td><a th:href="@{'/category/' + ${category.id} + '/delete'}">Delete</a></td>
+            </div>
         </tr>
     </table>
 
