@@ -4,48 +4,81 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Panel</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <link type="text/css" rel="stylesheet" href="/css/panel.css"/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+
 </head>
 <body>
 
-<!--<div sec:authorize="hasRole('ROLE_USER')">Text visible to user.</div>-->
-<!--<div sec:authorize="hasRole('ROLE_ADMIN')">Text visible to admin.</div>-->
-<!--<div sec:authorize="isAuthenticated()">-->
-    <!--Text visible only to authenticated users.-->
-<!--</div>-->
-<!--Authenticated username:-->
-<!--<div sec:authentication="name"></div>-->
-<!--Authenticated user roles:-->
-<!--<div sec:authentication="principal.authorities"></div>-->
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<form class="form-horizontal" method="post" th:action="@{/logout}">
-    <!-- Button -->
-    <label class="col-md-4 control-label" for="submit"></label>
-    <input type="submit" id="submit" value="Logout" name="submit" class="btn btn-primary btn-login"/>
-</form>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
 
-<h2>Welcome</h2>
+        </ul>
 
-<h1>List of categories</h1>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <form class="form-position" method="post" th:action="@{/logout}">
+                    <label class="col-md-4 control-label" for="submit"></label>
+                    <input type="submit" id="submit" value="Logout" name="submit" class="btn btn-primary btn-login"/>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    <a th:href="@{'/category/new'}"><h4>Add new category</h4></a>
-</div>
+<div class="container">
 
-<!--<a th:href="@{'/category/new'}"><h4>Add new category</h4></a>-->
+    <h1>List of categories</h1>
 
-<table>
+    <div class="category" sec:authorize="hasRole('ROLE_ADMIN')">
+        <a th:href="@{'/category/new'}">
+            <button class="btn btn-secondary"><i class="fas fa-plus"></i> Add new category</button>
+        </a>
+    </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Category</th>
+            <th sec:authorize="hasRole('ROLE_ADMIN')" scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr th:each="category : ${categories}">
             <td><a th:href="@{'category/' + ${category.id}}" th:text="${category.categoryName}"></a></td>
 
             <div sec:authorize="hasRole('ROLE_ADMIN')">
-                <td><a th:href="@{'/category/' + ${category.id} + '/update'}">Update</a></td>
+                <td>
+                    <a th:href="@{'/category/' + ${category.id} + '/update'}"><i class="fas fa-sync-alt"></i> Update</a>
+                    | <a th:href="@{'/category/' + ${category.id} + '/delete'}"><i class="fas fa-trash-alt"></i> Delete</a>
+                </td>
             </div>
 
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                <td><a th:href="@{'/category/' + ${category.id} + '/delete'}">Delete</a></td>
-            </div>
         </tr>
+        </tbody>
     </table>
-
+</div>
 </body>
 </html>
