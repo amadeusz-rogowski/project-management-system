@@ -3,7 +3,7 @@ package com.amicolon.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Builder
@@ -23,7 +23,7 @@ public class Category
 	private String categoryName;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category", orphanRemoval = true)
-	private Set<Task> tasks = new HashSet<>();
+	private Set<Task> tasks = new LinkedHashSet<>();
 
 	public Category addTask(Task task)
 	{

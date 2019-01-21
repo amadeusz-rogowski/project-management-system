@@ -3,7 +3,7 @@ package com.amicolon.commands;
 import com.amicolon.domain.Task;
 import lombok.*;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Builder
@@ -15,5 +15,5 @@ public class CategoryCommand
 {
 	private Long id;
 	private String categoryName;
-	private Set<Task> tasks = new HashSet<>();
+	private Set<Task> tasks = new LinkedHashSet<>();
 }
